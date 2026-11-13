@@ -1,292 +1,1326 @@
+/* =========================================================
+   BEYOND THE SUNSET
+   MAIN STYLESHEET — style.css
+
+   Cinematic 3D Fairy-Tale Experience
+   Responsive | Immersive | Premium UI
+========================================================= */
+
+
+/* =========================================================
+   01. GLOBAL RESET AND ROOT VARIABLES
+========================================================= */
+
+:root {
+    --color-gold: #f6c477;
+    --color-gold-light: #ffe3a8;
+    --color-orange: #e99a59;
+
+    --color-white: #ffffff;
+    --color-white-soft: rgba(255, 255, 255, 0.85);
+
+    --color-dark: #17151b;
+    --color-dark-soft: rgba(20, 19, 25, 0.65);
+
+    --font-main: "Segoe UI", Arial, sans-serif;
+
+    --transition-fast: 0.25s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 1s ease;
+
+    --shadow-soft:
+        0 10px 40px rgba(0, 0, 0, 0.18);
+
+    --shadow-gold:
+        0 0 30px rgba(246, 196, 119, 0.35);
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
+
+html,
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+
     overflow: hidden;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+    background: #171923;
+
+    font-family: var(--font-main);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+body {
+    position: relative;
+
+    color: var(--color-white);
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    overscroll-behavior: none;
+}
+
+
+button {
+    font-family: inherit;
+    border: none;
+    outline: none;
+}
+
+
+button:focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 5px;
+}
+
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   02. MAIN APPLICATION
+========================================================= */
+
+#app {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7b77e 0%,
+            #d88b6d 45%,
+            #242536 100%
+        );
+}
+
+
+.experience-container {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 1;
+
+    background: transparent;
+}
+
+
+.scene-container {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: transparent;
+}
+
+
+/* Three.js Canvas */
+
+.scene-container canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    outline: none;
+
+    touch-action: none;
+}
+
+
+/* =========================================================
+   03. START SCREEN
+========================================================= */
+
+.start-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(27, 24, 34, 0.10),
+            rgba(22, 19, 28, 0.52)
+        );
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+
+.start-screen::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 40%,
+            rgba(255, 214, 155, 0.13),
+            transparent 65%
+        );
+}
+
+
+.start-screen::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 65%,
+            rgba(15, 15, 23, 0.38)
+        );
+}
+
+
+.start-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    max-width: 850px;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    animation: startContentReveal 1.5s ease both;
+}
+
+
+/* =========================================================
+   04. START SCREEN DECORATION
+========================================================= */
+
+.start-decoration {
+    display: flex;
+    align-items: center;
     justify-content: center;
+
+    gap: 24px;
+
+    margin-bottom: 28px;
+
+    color: var(--color-gold-light);
+
+    font-size: 20px;
+
+    text-shadow: var(--shadow-gold);
+}
+
+
+.start-decoration span:nth-child(1) {
+    animation: starFloat 3s ease-in-out infinite;
+}
+
+
+.start-decoration span:nth-child(2) {
+    font-size: 34px;
+
+    animation: starFloat 4s ease-in-out infinite reverse;
+}
+
+
+.start-decoration span:nth-child(3) {
+    animation: starFloat 3.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   05. START SCREEN TYPOGRAPHY
+========================================================= */
+
+.eyebrow {
+    margin-bottom: 22px;
+
+    color: var(--color-gold-light);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 5px;
+    line-height: 1.8;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+.main-title {
+    max-width: 100%;
+
+    color: #fff7e9;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(42px, 7vw, 92px);
+
+    font-weight: 400;
+
+    line-height: 1.12;
+
+    letter-spacing: -2px;
+
+    text-wrap: balance;
+
+    text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.35),
+        0 0 45px rgba(255, 210, 150, 0.20);
+}
+
+
+.start-description {
+    max-width: 540px;
+
+    margin-top: 26px;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(14px, 1.8vw, 19px);
+
+    font-weight: 400;
+
+    line-height: 1.9;
+
+    letter-spacing: 0.4px;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   06. START BUTTON
+========================================================= */
+
+.start-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    min-width: 235px;
+
+    min-height: 58px;
+
+    margin-top: 42px;
+
+    padding: 16px 28px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 230, 190, 0.75);
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 226, 176, 0.96),
+            rgba(227, 160, 99, 0.96)
+        );
+
+    color: #38251c;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.22),
+        0 0 30px rgba(255, 195, 120, 0.18);
+
+    transition:
+        transform var(--transition-medium),
+        box-shadow var(--transition-medium),
+        background var(--transition-medium);
+}
+
+
+.start-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    transform: skewX(-25deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.55),
+            transparent
+        );
+
+    transition: left 0.7s ease;
+}
+
+
+.start-button:hover::before {
+    left: 150%;
+}
+
+
+.start-button:hover {
+    transform: translateY(-4px) scale(1.035);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.28),
+        0 0 45px rgba(255, 195, 120, 0.35);
+}
+
+
+.start-button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+
+.button-icon {
+    position: relative;
+    z-index: 1;
+
+    font-size: 19px;
+
+    transition: transform var(--transition-fast);
+}
+
+
+.start-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+
+.start-instruction {
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 11px;
+
+    letter-spacing: 1.1px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   07. START SCREEN TRANSITION
+========================================================= */
+
+.start-screen.fade-out {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   08. LOADING SCREEN
+========================================================= */
+
+.loading-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #55404b 0%,
+            #26232f 65%,
+            #171923 100%
+        );
+
+    text-align: center;
+}
+
+
+.loading-content {
+    width: 100%;
+    max-width: 420px;
+
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-/* Animated Background */
-.background {
-    position: fixed;
-    inset: 0;
+
+.loading-spinner {
+    width: 55px;
+    height: 55px;
+
+    margin-bottom: 32px;
+
+    border: 2px solid rgba(255, 255, 255, 0.12);
+
+    border-top-color: var(--color-gold);
+
+    border-right-color: rgba(246, 196, 119, 0.55);
+
+    border-radius: 50%;
+
+    animation: spinnerRotate 1s linear infinite;
+}
+
+
+.loading-title {
+    color: #fff3df;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(23px, 4vw, 32px);
+
+    font-weight: 400;
+
+    line-height: 1.4;
+}
+
+
+.loading-message {
+    margin-top: 13px;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+.loading-progress-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+
+.loading-progress-track {
+    width: 100%;
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+.loading-progress-bar {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
     background:
-        radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 60%),
-        linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-    z-index: -2;
+        linear-gradient(
+            90deg,
+            #e5a25f,
+            #ffe4a7
+        );
+
+    box-shadow: var(--shadow-gold);
+
+    transition: width 0.3s ease;
 }
 
-/* Floating Glow */
-.background::before {
-    content: "";
+
+.loading-percentage {
+    align-self: flex-end;
+
+    color: var(--color-gold-light);
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   09. CINEMATIC HUD
+========================================================= */
+
+.cinematic-hud {
     position: absolute;
+
     inset: 0;
-    background-image:
-        radial-gradient(white 1px, transparent 1px),
-        radial-gradient(#ffeaa7 1px, transparent 1px);
-    background-size: 80px 80px, 120px 120px;
-    animation: float 20s linear infinite;
-    opacity: 0.35;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    opacity: 1;
+
+    transition: opacity 0.7s ease;
 }
 
-@keyframes float {
+
+.hud-top-left {
+    position: absolute;
+
+    top: 35px;
+    left: 40px;
+}
+
+
+.hud-label {
+    display: inline-block;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   10. SOUND CONTROL
+========================================================= */
+
+.hud-top-right {
+    position: absolute;
+
+    top: 25px;
+    right: 30px;
+
+    pointer-events: auto;
+}
+
+
+.sound-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+
+    border-radius: 50%;
+
+    background: rgba(20, 20, 25, 0.24);
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+        background var(--transition-fast),
+        transform var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+
+.sound-button:hover {
+    transform: scale(1.08);
+
+    background: rgba(255, 255, 255, 0.16);
+
+    border-color: var(--color-gold-light);
+}
+
+
+.sound-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   11. SCENE DESCRIPTION
+========================================================= */
+
+.hud-bottom {
+    position: absolute;
+
+    bottom: 40px;
+    left: 50%;
+
+    width: calc(100% - 40px);
+    max-width: 650px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+}
+
+
+.scene-description {
+    color: rgba(255, 255, 255, 0.95);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(14px, 2vw, 19px);
+
+    font-style: italic;
+
+    letter-spacing: 0.5px;
+
+    line-height: 1.8;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(0, 0, 0, 0.35);
+
+    animation: descriptionFade 1s ease both;
+}
+
+
+/* =========================================================
+   12. PAUSE SCREEN
+========================================================= */
+
+.pause-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(15, 15, 23, 0.72);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+.pause-content {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    box-shadow: var(--shadow-soft);
+}
+
+
+.pause-content h2 {
+    color: #fff0d9;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   13. ERROR SCREEN
+========================================================= */
+
+.error-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #292331,
+            #171923
+        );
+}
+
+
+.error-content {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 40px 25px;
+
+    text-align: center;
+}
+
+
+.error-content h2 {
+    color: #ffdfc4;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 30px;
+
+    font-weight: 400;
+}
+
+
+.error-content p {
+    margin-top: 18px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   14. NO JAVASCRIPT MESSAGE
+========================================================= */
+
+.noscript-message {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: #171923;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   15. CINEMATIC OVERLAY EFFECTS
+========================================================= */
+
+#experience::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.10),
+            transparent 18%,
+            transparent 75%,
+            rgba(0, 0, 0, 0.16)
+        );
+}
+
+
+#experience::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 120px rgba(0, 0, 0, 0.13);
+}
+
+
+/* =========================================================
+   16. ANIMATIONS
+========================================================= */
+
+@keyframes startContentReveal {
+
     from {
+        opacity: 0;
+
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
         transform: translateY(0);
     }
-    to {
-        transform: translateY(-120px);
-    }
+
 }
 
-.title {
-    color: white;
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    text-shadow: 0 0 15px #ffffff;
-}
 
-.flower-container {
-    width: 280px;
-    height: 280px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@keyframes starFloat {
 
-#flower {
-    width: 220px;
-    cursor: pointer;
-    transition: transform .4s ease, filter .4s ease;
-    filter: drop-shadow(0 0 25px rgba(255,255,255,.6));
-}
-
-#flower:hover {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 35px #ff66cc);
-}
-
-/* Bloom Animation */
-.bloom {
-    animation: bloom .8s ease;
-}
-
-@keyframes bloom {
-    0% {
-        transform: scale(.6) rotate(-10deg);
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.7;
     }
 
     50% {
-        transform: scale(1.25) rotate(10deg);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-#message {
-    margin-top: 20px;
-    color: white;
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px white;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-
-    .title {
-        font-size: 1.6rem;
-    }
-
-    #flower {
-        width: 180px;
-    }
-
-    #message {
-        font-size: 1rem;
+        transform: translateY(-9px);
+        opacity: 1;
     }
 
 }
-/* Falling Petals */
 
-#petals{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-}
 
-.petal{
-    position:absolute;
-    top:-50px;
-    width:20px;
-    height:20px;
-    background:pink;
-    border-radius:60% 40% 60% 40%;
-    opacity:.8;
-    animation:fall linear forwards;
-}
+@keyframes spinnerRotate {
 
-@keyframes fall{
+    from {
+        transform: rotate(0deg);
+    }
 
-0%{
-transform:translateY(-50px) rotate(0deg);
-}
-
-100%{
-transform:translateY(110vh) rotate(720deg);
-}
-
-}
-/* Butterflies */
-
-.butterfly{
-    position:fixed;
-    font-size:30px;
-    animation:fly linear forwards;
-    pointer-events:none;
-}
-
-@keyframes fly{
-
-0%{
-transform:translateX(-100px);
-}
-
-100%{
-transform:translateX(110vw);
-}
+    to {
+        transform: rotate(360deg);
+    }
 
 }
 
-/* Fireflies */
 
-.firefly{
-    position:fixed;
-    width:8px;
-    height:8px;
-    background:#ffff99;
-    border-radius:50%;
-    box-shadow:0 0 15px yellow;
-    animation:blink 2s infinite;
-}
+@keyframes descriptionFade {
 
-@keyframes blink{
+    from {
+        opacity: 0;
 
-0%,100%{
-opacity:.2;
-}
+        transform: translateY(10px);
+    }
 
-50%{
-opacity:1;
-}
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
 
 }
 
-/* Hearts */
 
-.heart{
-    position:absolute;
-    color:#ff4d6d;
-    font-size:24px;
-    animation:heartUp 1.5s linear forwards;
-}
+/* =========================================================
+   17. RESPONSIVE DESIGN — TABLETS
+========================================================= */
 
-@keyframes heartUp{
+@media screen and (max-width: 1024px) {
 
-0%{
-opacity:1;
-transform:translateY(0) scale(.8);
-}
+    .main-title {
+        font-size: clamp(42px, 8vw, 75px);
+    }
 
-100%{
-opacity:0;
-transform:translateY(-150px) scale(1.8);
-}
+    .start-description {
+        max-width: 470px;
+    }
 
-}
+    .hud-top-left {
+        top: 25px;
+        left: 25px;
+    }
 
-/* Loading Screen */
-
-#loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#081b29;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-font-size:30px;
-z-index:9999;
-transition:1s;
-}
-
-/* Gift Box */
-
-.gift{
-font-size:90px;
-margin-top:30px;
-animation:bounce 1s infinite;
-cursor:pointer;
-}
-
-@keyframes bounce{
-
-0%,100%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-20px);
-}
+    .hud-top-right {
+        top: 20px;
+        right: 22px;
+    }
 
 }
 
-/* Typewriter */
 
-.typewriter{
+/* =========================================================
+   18. RESPONSIVE DESIGN — MOBILE
+========================================================= */
 
-overflow:hidden;
+@media screen and (max-width: 600px) {
 
-border-right:3px solid white;
+    html,
+    body,
+    #app {
+        width: 100%;
+        height: 100%;
 
-white-space:nowrap;
+        min-height: 100%;
+    }
 
-animation:
-typing 6s steps(60,end),
-blink .8s infinite;
+
+    .start-screen {
+        padding: 22px;
+    }
+
+
+    .start-content {
+        max-width: 100%;
+    }
+
+
+    .start-decoration {
+        margin-bottom: 20px;
+
+        gap: 18px;
+    }
+
+
+    .eyebrow {
+        margin-bottom: 17px;
+
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .main-title {
+        font-size: clamp(39px, 11vw, 58px);
+
+        letter-spacing: -1.5px;
+
+        line-height: 1.15;
+    }
+
+
+    .start-description {
+        max-width: 340px;
+
+        margin-top: 20px;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+
+    .start-button {
+        min-width: 210px;
+
+        min-height: 54px;
+
+        margin-top: 32px;
+
+        padding: 14px 22px;
+
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .start-instruction {
+        max-width: 280px;
+
+        margin-top: 20px;
+
+        font-size: 10px;
+    }
+
+
+    .hud-top-left {
+        top: 20px;
+        left: 18px;
+    }
+
+
+    .hud-label {
+        font-size: 8px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .hud-top-right {
+        top: 14px;
+        right: 15px;
+    }
+
+
+    .sound-button {
+        width: 39px;
+        height: 39px;
+
+        font-size: 19px;
+    }
+
+
+    .hud-bottom {
+        bottom: 25px;
+
+        width: calc(100% - 30px);
+    }
+
+
+    .scene-description {
+        font-size: 14px;
+    }
+
+
+    .loading-title {
+        font-size: 23px;
+    }
+
+
+    .loading-message {
+        font-size: 12px;
+    }
+
+
+    .pause-content h2 {
+        font-size: 27px;
+    }
 
 }
 
-@keyframes typing{
 
-from{
-width:0;
+/* =========================================================
+   19. SMALL MOBILE DEVICES
+========================================================= */
+
+@media screen and (max-width: 360px) {
+
+    .main-title {
+        font-size: 36px;
+    }
+
+
+    .start-description {
+        font-size: 13px;
+    }
+
+
+    .start-button {
+        min-width: 190px;
+
+        font-size: 9px;
+    }
+
+
+    .eyebrow {
+        font-size: 8px;
+
+        letter-spacing: 2px;
+    }
+
 }
 
-to{
-width:100%;
-}
+
+/* =========================================================
+   20. LANDSCAPE MOBILE DEVICES
+========================================================= */
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+
+    .start-screen {
+        padding: 12px;
+    }
+
+
+    .start-decoration {
+        margin-bottom: 5px;
+    }
+
+
+    .eyebrow {
+        margin-bottom: 8px;
+    }
+
+
+    .main-title {
+        font-size: clamp(32px, 7vh, 52px);
+    }
+
+
+    .start-description {
+        margin-top: 8px;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+
+    .start-button {
+        min-height: 43px;
+
+        margin-top: 15px;
+
+        padding: 10px 20px;
+    }
+
+
+    .start-instruction {
+        margin-top: 9px;
+
+        font-size: 9px;
+    }
 
 }
 
-@keyframes blink{
 
-50%{
-border-color:transparent;
+/* =========================================================
+   21. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+    }
+
 }
 
+
+/* =========================================================
+   22. TOUCH DEVICE OPTIMIZATION
+========================================================= */
+
+@media (hover: none) {
+
+    .start-button:hover {
+        transform: none;
+    }
+
+    .sound-button:hover {
+        transform: none;
+    }
+
 }
+
+
+/* =========================================================
+   END OF style.css
+========================================================= */
