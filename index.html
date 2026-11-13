@@ -1,42 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowers For You 🌸</title>
+    <meta name="theme-color" content="#f5a65b">
 
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="An immersive cinematic 3D fairy-tale experience featuring a magical sunset meadow, ocean, butterflies and an emotional story.">
+
+    <title>Beyond the Sunset | A Cinematic Experience</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+        }
+    }
+    </script>
+
 </head>
+
 <body>
-<!-- Loading Screen -->
-<div id="loader">
-    <h1>🌸 Loading Flower Garden...</h1>
-</div>
-    <!-- Background -->
-    <div class="background"></div>
 
-    <!-- Title -->
-    <h1 class="title">🌸 Tap the Flower 🌸</h1>
+    <!-- ==========================================
+         MAIN EXPERIENCE CONTAINER
+    =========================================== -->
 
-    <!-- Flower -->
-    <div class="flower-container">
-        <img id="flower" src="images/flower1.png" alt="Flower">
-    </div>
+    <main id="app">
 
-    <!-- Counter -->
-    <p id="message">Flower 1 of 10</p>
+        <!-- 3D EXPERIENCE VIEWPORT -->
 
-    <!-- Nature Music -->
-    <audio id="bgMusic" loop autoplay>
-        <source src="music/nature.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-<div id="petals"></div>
-<div id="butterflies"></div>
-<div id="fireflies"></div>
-<div id="hearts"></div>
-    <!-- Script -->
-    <script src="script.js"></script>
+        <section
+            id="experience"
+            class="experience-container"
+            aria-label="Interactive 3D cinematic environment">
+
+            <div
+                id="scene-container"
+                class="scene-container">
+
+                <!-- Three.js WebGL Canvas Will Be Created Here -->
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             INITIAL START SCREEN
+        =========================================== -->
+
+        <section
+            id="start-screen"
+            class="start-screen">
+
+            <div class="start-content">
+
+                <div class="start-decoration" aria-hidden="true">
+                    <span>✦</span>
+                    <span>✧</span>
+                    <span>✦</span>
+                </div>
+
+                <p class="eyebrow">
+                    A CINEMATIC FAIRY-TALE EXPERIENCE
+                </p>
+
+                <h1 class="main-title">
+                    Beyond the Sunset
+                </h1>
+
+                <p class="start-description">
+                    Sometimes, the most beautiful moments
+                    are the ones we cannot hold forever.
+                </p>
+
+                <button
+                    id="start-button"
+                    class="start-button"
+                    type="button">
+
+                    <span class="button-text">
+                        START EXPERIENCE
+                    </span>
+
+                    <span class="button-icon" aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+                <p class="start-instruction">
+                    Put on your headphones and enjoy the journey.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             LOADING SCREEN
+        =========================================== -->
+
+        <section
+            id="loading-screen"
+            class="loading-screen"
+            aria-live="polite"
+            aria-label="Loading experience"
+            hidden>
+
+            <div class="loading-content">
+
+                <div class="loading-spinner"></div>
+
+                <h2 class="loading-title">
+                    Preparing Your Experience
+                </h2>
+
+                <p
+                    id="loading-message"
+                    class="loading-message">
+
+                    Preparing the magical world...
+                </p>
+
+                <div class="loading-progress-container">
+
+                    <div class="loading-progress-track">
+
+                        <div
+                            id="loading-progress"
+                            class="loading-progress-bar">
+                        </div>
+
+                    </div>
+
+                    <span
+                        id="loading-percentage"
+                        class="loading-percentage">
+
+                        0%
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             CINEMATIC HUD
+        =========================================== -->
+
+        <section
+            id="cinematic-hud"
+            class="cinematic-hud"
+            aria-label="Experience controls"
+            hidden>
+
+            <!-- TOP LEFT: EXPERIENCE TITLE -->
+
+            <div class="hud-top-left">
+
+                <span class="hud-label">
+                    BEYOND THE SUNSET
+                </span>
+
+            </div>
+
+
+            <!-- TOP RIGHT: AUDIO CONTROL -->
+
+            <div class="hud-top-right">
+
+                <button
+                    id="sound-button"
+                    class="sound-button"
+                    type="button"
+                    aria-label="Toggle sound"
+                    aria-pressed="true">
+
+                    <span
+                        id="sound-icon"
+                        aria-hidden="true">
+
+                        ♪
+
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- BOTTOM: SCENE INFORMATION -->
+
+            <div class="hud-bottom">
+
+                <p
+                    id="scene-description"
+                    class="scene-description"
+                    aria-live="polite">
+
+                    Follow the butterfly...
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             PAUSE SCREEN
+        =========================================== -->
+
+        <section
+            id="pause-screen"
+            class="pause-screen"
+            hidden>
+
+            <div class="pause-content">
+
+                <h2>
+                    Experience Paused
+                </h2>
+
+                <button
+                    id="resume-button"
+                    class="start-button"
+                    type="button">
+
+                    RESUME
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             ERROR SCREEN
+        =========================================== -->
+
+        <section
+            id="error-screen"
+            class="error-screen"
+            role="alert"
+            hidden>
+
+            <div class="error-content">
+
+                <h2>
+                    Something Went Wrong
+                </h2>
+
+                <p id="error-message">
+                    The experience could not be initialized.
+                </p>
+
+                <button
+                    id="retry-button"
+                    class="start-button"
+                    type="button">
+
+                    TRY AGAIN
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             ACCESSIBILITY AND FALLBACK
+        =========================================== -->
+
+        <noscript>
+
+            <div class="noscript-message">
+
+                This cinematic experience requires JavaScript
+                to be enabled in your browser.
+
+            </div>
+
+        </noscript>
+
+    </main>
+
+
+    <!-- ==========================================
+         MAIN JAVASCRIPT APPLICATION
+    =========================================== -->
+
+    <script
+        type="module"
+        src="./script.js">
+    </script>
 
 </body>
+
 </html>
